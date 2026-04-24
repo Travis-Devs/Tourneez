@@ -9,14 +9,59 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TournamentsJoinRouteImport } from './routes/tournaments/join'
+import { Route as TournamentsCreateRouteImport } from './routes/tournaments/create'
+import { Route as TournamentsTournamentIdIndexRouteImport } from './routes/tournaments/$tournamentId/index'
+import { Route as TournamentsTournamentIdResultsRouteImport } from './routes/tournaments/$tournamentId/results'
+import { Route as TournamentsTournamentIdManageRouteImport } from './routes/tournaments/$tournamentId/manage'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TournamentsJoinRoute = TournamentsJoinRouteImport.update({
+  id: '/tournaments/join',
+  path: '/tournaments/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TournamentsCreateRoute = TournamentsCreateRouteImport.update({
+  id: '/tournaments/create',
+  path: '/tournaments/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TournamentsTournamentIdIndexRoute =
+  TournamentsTournamentIdIndexRouteImport.update({
+    id: '/tournaments/$tournamentId/',
+    path: '/tournaments/$tournamentId/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TournamentsTournamentIdResultsRoute =
+  TournamentsTournamentIdResultsRouteImport.update({
+    id: '/tournaments/$tournamentId/results',
+    path: '/tournaments/$tournamentId/results',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TournamentsTournamentIdManageRoute =
+  TournamentsTournamentIdManageRouteImport.update({
+    id: '/tournaments/$tournamentId/manage',
+    path: '/tournaments/$tournamentId/manage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -25,37 +70,142 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/tournaments/create': typeof TournamentsCreateRoute
+  '/tournaments/join': typeof TournamentsJoinRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/tournaments/$tournamentId/manage': typeof TournamentsTournamentIdManageRoute
+  '/tournaments/$tournamentId/results': typeof TournamentsTournamentIdResultsRoute
+  '/tournaments/$tournamentId/': typeof TournamentsTournamentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/tournaments/create': typeof TournamentsCreateRoute
+  '/tournaments/join': typeof TournamentsJoinRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/tournaments/$tournamentId/manage': typeof TournamentsTournamentIdManageRoute
+  '/tournaments/$tournamentId/results': typeof TournamentsTournamentIdResultsRoute
+  '/tournaments/$tournamentId': typeof TournamentsTournamentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/tournaments/create': typeof TournamentsCreateRoute
+  '/tournaments/join': typeof TournamentsJoinRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/tournaments/$tournamentId/manage': typeof TournamentsTournamentIdManageRoute
+  '/tournaments/$tournamentId/results': typeof TournamentsTournamentIdResultsRoute
+  '/tournaments/$tournamentId/': typeof TournamentsTournamentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/tournaments/create'
+    | '/tournaments/join'
+    | '/api/auth/$'
+    | '/tournaments/$tournamentId/manage'
+    | '/tournaments/$tournamentId/results'
+    | '/tournaments/$tournamentId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/auth/$'
-  id: '__root__' | '/' | '/api/auth/$'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/tournaments/create'
+    | '/tournaments/join'
+    | '/api/auth/$'
+    | '/tournaments/$tournamentId/manage'
+    | '/tournaments/$tournamentId/results'
+    | '/tournaments/$tournamentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/tournaments/create'
+    | '/tournaments/join'
+    | '/api/auth/$'
+    | '/tournaments/$tournamentId/manage'
+    | '/tournaments/$tournamentId/results'
+    | '/tournaments/$tournamentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  LoginRoute: typeof LoginRoute
+  TournamentsCreateRoute: typeof TournamentsCreateRoute
+  TournamentsJoinRoute: typeof TournamentsJoinRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  TournamentsTournamentIdManageRoute: typeof TournamentsTournamentIdManageRoute
+  TournamentsTournamentIdResultsRoute: typeof TournamentsTournamentIdResultsRoute
+  TournamentsTournamentIdIndexRoute: typeof TournamentsTournamentIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournaments/join': {
+      id: '/tournaments/join'
+      path: '/tournaments/join'
+      fullPath: '/tournaments/join'
+      preLoaderRoute: typeof TournamentsJoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournaments/create': {
+      id: '/tournaments/create'
+      path: '/tournaments/create'
+      fullPath: '/tournaments/create'
+      preLoaderRoute: typeof TournamentsCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournaments/$tournamentId/': {
+      id: '/tournaments/$tournamentId/'
+      path: '/tournaments/$tournamentId'
+      fullPath: '/tournaments/$tournamentId/'
+      preLoaderRoute: typeof TournamentsTournamentIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournaments/$tournamentId/results': {
+      id: '/tournaments/$tournamentId/results'
+      path: '/tournaments/$tournamentId/results'
+      fullPath: '/tournaments/$tournamentId/results'
+      preLoaderRoute: typeof TournamentsTournamentIdResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tournaments/$tournamentId/manage': {
+      id: '/tournaments/$tournamentId/manage'
+      path: '/tournaments/$tournamentId/manage'
+      fullPath: '/tournaments/$tournamentId/manage'
+      preLoaderRoute: typeof TournamentsTournamentIdManageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
@@ -70,7 +220,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  LoginRoute: LoginRoute,
+  TournamentsCreateRoute: TournamentsCreateRoute,
+  TournamentsJoinRoute: TournamentsJoinRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  TournamentsTournamentIdManageRoute: TournamentsTournamentIdManageRoute,
+  TournamentsTournamentIdResultsRoute: TournamentsTournamentIdResultsRoute,
+  TournamentsTournamentIdIndexRoute: TournamentsTournamentIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

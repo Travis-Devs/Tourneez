@@ -1,10 +1,22 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Scripts, createRootRoute, redirect } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import appCss from '../styles.css?url'
+import { getSession } from '#/lib/session'
 
 export const Route = createRootRoute({
+  beforeLoad: async ({ location }) => {
+    const isPublic =
+      location.pathname === '/login' || location.pathname.startsWith('/api/')
+    const session = await getSession()
+    if (!session && !isPublic) {
+      throw redirect({ to: '/login' })
+    }
+    if (session && location.pathname === '/login') {
+      throw redirect({ to: '/dashboard' })
+    }
+  },
   head: () => ({
     meta: [
       {
@@ -15,7 +27,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Tourneez',
       },
     ],
     links: [

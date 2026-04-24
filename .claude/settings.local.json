@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(dotenv -e .env.local -- npx @better-auth/cli migrate)",
+      "Bash(npx dotenv-cli *)",
+      "Bash(npx dotenv *)",
+      "Bash(node -e \"const s = require\\('@tanstack/react-start'\\); console.log\\(Object.keys\\(s\\).filter\\(k => k.includes\\('API'\\) || k.includes\\('api'\\) || k.includes\\('Route'\\)\\)\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(pnpm dlx *)",
+      "Bash(npm run *)",
+      "Bash(node -e \"const m = require\\('./node_modules/@tanstack/react-start/dist/cjs/server.js'\\); console.log\\(Object.keys\\(m\\).filter\\(k => k.toLowerCase\\(\\).includes\\('request'\\) || k.toLowerCase\\(\\).includes\\('header'\\) || k.toLowerCase\\(\\).includes\\('web'\\)\\)\\)\")"
+    ]
+  }
+}
